@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!--  -->
+    <color name="msg_emote_divider">#ffa1a1a1</color>
+    <!-- menudraw -->
+    <color name="md__defaultBackground">#FF555555</color>
+
+    <!-- A light Holo shade of blue -->
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#ff99cc00</color>
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ffff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <!-- A dark Holo shade of green -->
+    <color name="holo_green_dark">#ff669900</color>
+    <!-- A dark Holo shade of red -->
+    <color name="holo_red_dark">#ffcc0000</color>
+    <!-- A Holo shade of purple -->
+    <color name="holo_purple">#ffaa66cc</color>
+    <!-- A light Holo shade of orange -->
+    <color name="holo_orange_light">#ffffbb33</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="holo_blue_bright">#ff00ddff</color>
+
+    <color name="text_normal">#626262</color>
+    <color name="text_light">#ababab</color>
+    <color name="text_super_light">#c0c0c0</color>
+    <color name="blue_light">#41bf41</color>
+    <color name="blue_dark">#41bf41</color>
+    <color name="stroke">#77d4f6</color>
+
+
+    <color name="flowup_title_select">#ffffff</color>
+    <color name="flowup_title_noSelect">#1684e3</color>
+
+    <color name="flowup_text_agree">#1684e3</color>
+    <color name="flowup_text_refuse">#990000</color>
+
+
+    <color name="person_msg_white_bg">#ffffff</color>
+    <color name="systolic_line">#1684e3</color>
+    <color name="diastolic_line">#59f3e3</color>
+    <color name="pulse_line">#ff5a5a</color>
+    <color name="oxygen_line">#ff8ada</color>
+    <color name="suger_line">#fcba3b</color>
+
+
+    <!--公共颜色-->
+    <color name="common_height">#1f1f1f</color>
+    <color name="common_list_devider">#dfdfdf</color>
+    <color name="common_gray_font">#969696</color>
+    <color name="common_list_bg">#f6f6f6</color>
+    <color name="common_login_line">#d7d7d7</color>
+
+    <color name="common_green">#31c27c</color>
+    <color name="common_blue">#FF3BCEED</color>
+    <color name="common_orange">#faa47e</color>
+    <color name="common_ox">#e6c070</color>
+
+    <!-- common -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#8f000000</color>
+    <color name="orange">#f27242</color>
+
+    <!-- background -->
+    <color name="bg">#FFF5F5F5</color>
+    <color name="bg_pressed">#FFF2F2F2</color>
+    <color name="bg_popwindow">#b5555555</color>
+
+    <!-- material design black font color -->
+    <color name="font_black_0">#212121</color>
+    <color name="font_black_1">#424242</color>
+    <color name="font_black_2">#616161</color>
+    <color name="font_black_3">#757575</color>
+    <color name="font_black_4">#9e9e9e</color>
+    <color name="font_black_5">#bdbdbd</color>
+    <color name="font_black_6">#e0e0e0</color>
+
+    <!-- divider -->
+    <color name="divider_1">#e2e2e2</color>
+    <color name="divider_2">#e6e6e6</color>
+</resources>
