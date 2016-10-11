@@ -59,7 +59,7 @@
     <color name="common_gray_font">#969696</color>
     <color name="common_list_bg">#f6f6f6</color>
     <color name="common_login_line">#d7d7d7</color>
-
+    <color name="common_bg">#1CFAA47E</color>
     <color name="common_green">#31c27c</color>
     <color name="common_blue">#FF3BCEED</color>
     <color name="common_orange">#faa47e</color>
@@ -89,4 +89,8 @@
     <!-- divider -->
     <color name="divider_1">#e2e2e2</color>
     <color name="divider_2">#e6e6e6</color>
+
+
+
+
 </resources>

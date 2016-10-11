@@ -16,12 +16,12 @@
         android:layout_width="@dimen/login_loading_dialog_img"  
         android:layout_height="@dimen/login_loading_dialog_img" 
         android:layout_marginRight="16dp"
-        android:background="@anim/loading_progress"/>  
+        />
     <TextView  
         android:id="@+id/id_tv_loadingmsg"  
         android:layout_width="wrap_content"  
         android:layout_height="wrap_content"  
         android:layout_marginLeft="16dp" 
-        style="@style/login_loading_text_style"/>  
+        />
   </LinearLayout>
 </LinearLayout>  

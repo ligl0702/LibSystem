@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_bg"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+
+        <!-- 底部菜单 -->
+        <com.lll.library.view.MainFragmentTabHost
+            android:id="@android:id/tabhost"
+            android:layout_width="match_parent"
+            android:layout_height="49dip"
+            android:background="#FFF8F8F8"
+            android:layout_alignParentBottom="true" >
+
+            <!-- 隐藏系统的 -->
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="0" />
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="49dip"
+                android:orientation="horizontal" />
+        </com.lll.library.view.MainFragmentTabHost>
+        <!-- 内容区域 -->
+        <FrameLayout
+            android:id="@+id/realtabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@android:id/tabhost" />
+
+    </RelativeLayout>
+    
+
+</RelativeLayout>

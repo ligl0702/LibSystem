@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/LibSystem.iml" filepath="$PROJECT_DIR$/LibSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/LibraryManagementSystem.iml" filepath="$PROJECT_DIR$/LibraryManagementSystem.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

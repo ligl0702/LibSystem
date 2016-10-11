@@ -18,7 +18,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private Button mLoginBtn, mRegisterBtn;
     private EditText mLoginNameEt;
     private EditText mLoginPwdEt;
@@ -35,15 +35,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initData() {
-        mRememberPwdCb.setChecked(SpUtil.getBoolean(MainActivity.this, Constant.IS_REMEMBER_PWD, false));
+        mRememberPwdCb.setChecked(SpUtil.getBoolean(LoginActivity.this, Constant.IS_REMEMBER_PWD, false));
 
-        String userName = SpUtil.getString(MainActivity.this, Constant.USER_NAME, "");
+        String userName = SpUtil.getString(LoginActivity.this, Constant.USER_NAME, "");
         if (!TextUtils.isEmpty(userName)) {
             mLoginNameEt.setText(userName);
         }
 
         if (mRememberPwdCb.isChecked()) {
-            String userPwd = SpUtil.getString(MainActivity.this, Constant.USER_PWD, "");
+            String userPwd = SpUtil.getString(LoginActivity.this, Constant.USER_PWD, "");
             if (!TextUtils.isEmpty(userPwd)) {
                 mLoginPwdEt.setText(userPwd);
             }
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showToast(String msg) {
-        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
 
     private void login() {
@@ -89,20 +89,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 public void done(Object o, BmobException e) {
                     //通过BmobUser user = BmobUser.getCurrentUser(context)获取登录成功后的本地用户信息
                     //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(context,MyUser.class)获取自定义用户信息
-                    showToast(getString(R.string.login_success_tip));
 
-                    if (mRememberPwdCb.isChecked()) {
-                        SpUtil.putBoolean(MainActivity.this, Constant.IS_REMEMBER_PWD, true);
-                    } else {
-                        SpUtil.putBoolean(MainActivity.this, Constant.IS_REMEMBER_PWD, false);
+                    if(e==null){
+                        showToast(getString(R.string.login_success_tip));
+                        if (mRememberPwdCb.isChecked()) {
+                            SpUtil.putBoolean(LoginActivity.this, Constant.IS_REMEMBER_PWD, true);
+                        } else {
+                            SpUtil.putBoolean(LoginActivity.this, Constant.IS_REMEMBER_PWD, false);
+                        }
+                        startActivity(new Intent(LoginActivity.this,MainFragmentActivity.class));
+                    }else{
+                        showToast(e.getMessage());
                     }
+
                 }
             });
         }
     }
 
     private void register() {
-        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
     @Override
