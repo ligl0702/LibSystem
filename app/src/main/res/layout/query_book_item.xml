@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp">
+
+    <ImageView
+        android:id="@+id/iv_book"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_book" />
+
+    <TextView
+        android:id="@+id/tv_book_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/iv_book"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="18sp"
+        tools:text="Android APP开发入门∶使用Android Studio环境" />
+
+    <TextView
+        android:id="@+id/tv_book_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_book_name"
+        android:layout_below="@id/tv_book_name"
+        android:layout_marginTop="2dp"
+        android:textSize="16sp"
+        tools:text="@string/book_author" />
+
+    <TextView
+        android:id="@+id/tv_book_press"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_book_name"
+        android:layout_below="@id/tv_book_author"
+        android:layout_marginTop="2dp"
+        tools:text="机械工业出版社" />
+
+    <TextView
+        android:id="@+id/tv_book_press_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/tv_book_name"
+        android:layout_below="@id/tv_book_press"
+        android:layout_marginTop="2dp"
+        tools:text="2016年出版" />
+
+</RelativeLayout>

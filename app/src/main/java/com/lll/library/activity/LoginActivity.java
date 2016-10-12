@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.lll.library.R;
 import com.lll.library.util.Constant;
+import com.lll.library.util.MyLoadingDialog;
 import com.lll.library.util.SpUtil;
 
 import cn.bmob.v3.BmobUser;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String userName = SpUtil.getString(LoginActivity.this, Constant.USER_NAME, "");
         if (!TextUtils.isEmpty(userName)) {
             mLoginNameEt.setText(userName);
+            mLoginNameEt.setSelection(userName.length());
         }
 
         if (mRememberPwdCb.isChecked()) {
@@ -81,6 +83,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void login() {
         if (validate()) {
+            MyLoadingDialog.showLoading(this);
+
             BmobUser user = new BmobUser();
             user.setUsername(mLoginNameEt.getText().toString().trim());
             user.setPassword(mLoginPwdEt.getText().toString().trim());
@@ -90,25 +94,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //通过BmobUser user = BmobUser.getCurrentUser(context)获取登录成功后的本地用户信息
                     //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(context,MyUser.class)获取自定义用户信息
 
-                    if(e==null){
+                    if (e == null) {
+                        MyLoadingDialog.dismissLoading();
+
                         showToast(getString(R.string.login_success_tip));
+                        SpUtil.putString(LoginActivity.this, Constant.USER_NAME, mLoginNameEt.getText().toString().trim());
+
                         if (mRememberPwdCb.isChecked()) {
                             SpUtil.putBoolean(LoginActivity.this, Constant.IS_REMEMBER_PWD, true);
+                            SpUtil.putString(LoginActivity.this, Constant.USER_PWD, mLoginPwdEt.getText().toString().trim());
                         } else {
                             SpUtil.putBoolean(LoginActivity.this, Constant.IS_REMEMBER_PWD, false);
                         }
-                        startActivity(new Intent(LoginActivity.this,MainFragmentActivity.class));
-                    }else{
+                        startActivity(new Intent(LoginActivity.this, MainFragmentActivity.class));
+                    } else {
                         showToast(e.getMessage());
                     }
-
                 }
             });
         }
     }
 
     private void register() {
-        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+        startActivityForResult(new Intent(LoginActivity.this, RegisterActivity.class), Constant.REGISTER_REQUEST_CODE);
     }
 
     @Override
@@ -125,6 +133,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             default:
                 break;
 
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constant.REGISTER_REQUEST_CODE) {
+            if (data != null) {
+                mLoginNameEt.setText(data.getStringExtra(Constant.USER_NAME));
+                mLoginPwdEt.setText(data.getStringExtra(Constant.USER_PWD));
+
+                login();
+            }
         }
     }
 }

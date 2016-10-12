@@ -3,6 +3,7 @@ package com.lll.library.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 
 import com.lll.library.R;
 import com.lll.library.util.Constant;
-import com.lll.library.util.SpUtil;
+import com.lll.library.util.MyLoadingDialog;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -40,10 +41,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
         mLoginNameEt = (EditText) findViewById(R.id.et_name);
         mLoginPwdEt = (EditText) findViewById(R.id.et_password);
+
     }
 
     private void register() {
         if (validate()) {
+            MyLoadingDialog.showLoading(this);
+
             BmobUser user = new BmobUser();
             user.setUsername(mLoginNameEt.getText().toString().trim());
             user.setPassword(mLoginPwdEt.getText().toString().trim());
@@ -52,21 +56,24 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
             user.signUp(new SaveListener<BmobUser>() {
                 @Override
                 public void done(final BmobUser o, BmobException e) {
+                    MyLoadingDialog.dismissLoading();
+
                     if (e == null) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                         builder.setMessage(getString(R.string.register_success_tip));
                         builder.setPositiveButton(getString(R.string.goto_login_tip), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                SpUtil.putString(RegisterActivity.this, Constant.USER_NAME, o.getUsername());
+                                Intent intent = new Intent();
+                                intent.putExtra(Constant.USER_NAME, mLoginNameEt.getText().toString().trim());
+                                intent.putExtra(Constant.USER_PWD, mLoginPwdEt.getText().toString().trim());
+                                setResult(RESULT_OK, intent);
                                 RegisterActivity.this.finish();
                             }
                         });
                         builder.show();
                     } else {
-                        if (e.getErrorCode() == Constant.REGISTER_EXIST_ERROR_CODE) {
-                            showToast(e.getMessage());
-                        }
+                        showToast(e.getMessage());
                     }
                 }
             });

@@ -84,17 +84,17 @@ public class BaseActivity extends Activity {
                     if (mLoadDialog == null) {
                         mLoadDialog = LoadDialog.createDialog(BaseActivity.this);
                         mLoadDialog
-                                .setMessage(getString(R.string.group_name_loading));
+                                .setMessage(getString(R.string.loading));
                     } else {
                         mLoadDialog
-                                .setMessage(getString(R.string.group_name_loading));
+                                .setMessage(getString(R.string.loading));
                     }
                     mLoadDialog.show();
                     break;
                 case 2:
                     int messageId = msg.arg1;
                     if (messageId == 0)
-                        messageId = R.string.group_name_loading;
+                        messageId = R.string.loading;
                     boolean cancelable = msg.arg2 == 1;
                     if (mLoadDialog == null) {
                         mLoadDialog = LoadDialog.createDialog(BaseActivity.this);

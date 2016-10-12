@@ -12,18 +12,17 @@ import com.lll.library.view.layout.TitleBar;
 
 
 /**
- * 首页
- * 圈子-注册用户发表的动态列表
  * Created by guoliangli on 2016/9/9.
  */
-public class CircleFragment extends Fragment {
+public class AddFragment extends Fragment {
 
     private TitleBar titleBar;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.circle_fragment_layout, container, false);
-        titleBar= (TitleBar) view.findViewById(R.id.title_bar);
+        View view = inflater.inflate(R.layout.add_fragment_layout, container, false);
+        titleBar = (TitleBar) view.findViewById(R.id.title_bar);
         titleBar.setText("图书管理系统");
         titleBar.setBackViewVisibility(View.GONE);
         return view;

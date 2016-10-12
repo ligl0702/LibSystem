@@ -1,4 +1,4 @@
-package com.tongcheng.lib.serv.ui.adapter;
+package com.lll.library.adapter;
 
 /**
  * 改版履历
@@ -11,6 +11,7 @@ package com.tongcheng.lib.serv.ui.adapter;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Adapter公共类
@@ -27,9 +28,9 @@ public abstract class CommonAdapter<DataType> extends BaseAdapter {
     /**
      * 数据列表
      */
-    public ArrayList<DataType> mData = new ArrayList<DataType>();
+    public List<DataType> mData = new ArrayList<DataType>();
 
-    public void setData(ArrayList<DataType> data) {
+    public void setData(List<DataType> data) {
         mData = data;
         notifyDataSetChanged();
     }
@@ -69,7 +70,7 @@ public abstract class CommonAdapter<DataType> extends BaseAdapter {
      * 获取数据列表
      * @return 数据列表
      */
-    public ArrayList<DataType> getData() {
+    public List<DataType> getData() {
         return mData;
     }
 
