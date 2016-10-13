@@ -21,7 +21,6 @@ import com.lll.library.adapter.BooksAdapter;
 import com.lll.library.entity.Books;
 import com.lll.library.entity.QueryConditionObj;
 import com.lll.library.util.Constant;
-import com.lll.library.view.layout.TitleBar;
 
 import java.util.List;
 
@@ -70,7 +69,7 @@ public class QueryFragment extends Fragment implements View.OnClickListener, Ada
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constant.QUERY_REQUEST_CODE) {
+        if (requestCode == Constant.QUERY_REQUEST_CODE && resultCode == getActivity().RESULT_OK) {
             StringBuilder bql = new StringBuilder();
             bql.append("select * from Books book ");
             if (data != null) {
