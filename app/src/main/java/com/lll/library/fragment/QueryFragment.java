@@ -35,7 +35,6 @@ import cn.bmob.v3.listener.SQLQueryListener;
  * Created by guoliangli on 2016/9/9.
  */
 public class QueryFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
-    private TitleBar titleBar;
     private TextView mSearchTv;
     private ListView mBooksLv;
     private BooksAdapter mBookAdapter;
@@ -44,9 +43,6 @@ public class QueryFragment extends Fragment implements View.OnClickListener, Ada
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.query_fragment_layout, container, false);
-        titleBar = (TitleBar) view.findViewById(R.id.title_bar);
-        titleBar.setText("图书管理系统");
-        titleBar.setBackViewVisibility(View.GONE);
 
         mSearchTv = (TextView) view.findViewById(R.id.tv_search);
         mSearchTv.setOnClickListener(this);

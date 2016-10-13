@@ -16,15 +16,11 @@ import com.lll.library.view.layout.TitleBar;
  */
 public class UpdateFragment extends Fragment {
 
-    private TitleBar titleBar;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_fragment_layout, container, false);
-        titleBar = (TitleBar) view.findViewById(R.id.title_bar);
-        titleBar.setText("图书管理系统");
-        titleBar.setBackViewVisibility(View.GONE);
         return view;
     }
 }

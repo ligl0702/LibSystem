@@ -15,6 +15,7 @@ import com.lll.library.fragment.QueryFragment;
 import com.lll.library.fragment.UpdateFragment;
 import com.lll.library.view.MainFragmentTabHost;
 import com.lll.library.view.TabManager;
+import com.lll.library.view.layout.TitleBar;
 
 
 /**
@@ -43,6 +44,8 @@ public class MainFragmentActivity extends FragmentActivity {
      */
     public static final String TAB_QUERY = "query";
 
+    private TitleBar titleBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,9 @@ public class MainFragmentActivity extends FragmentActivity {
     }
 
     private void initViews() {
+        titleBar = (TitleBar) findViewById(R.id.title_bar);
+        titleBar.setText("图书管理系统");
+        titleBar.setBackViewVisibility(View.GONE);
         mTabHost = (MainFragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
@@ -85,6 +91,20 @@ public class MainFragmentActivity extends FragmentActivity {
 
             @Override
             public void onTabChanged(String tabId) {
+                switch (tabId){
+                    case TAB_ADD:
+                        titleBar.setText("增加图书");
+                        break;
+                    case TAB_DELETE:
+                        titleBar.setText("删除");
+                        break;
+                    case TAB_UPDATE:
+                        titleBar.setText("修改");
+                        break;
+                    case TAB_QUERY:
+                        titleBar.setText("图书管理系统");
+                        break;
+                }
                 TabManager.getInstance().setCurrentTab(tabId);
             }
         });
