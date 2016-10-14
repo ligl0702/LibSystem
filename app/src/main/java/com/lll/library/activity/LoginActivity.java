@@ -148,4 +148,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
+
+    //okhttp 原始使用方法
+//    private void postAsynHttp() {
+//        OkHttpClient mOkHttpClient=new OkHttpClient();
+//        RequestBody formBody = new FormBody.Builder()
+//                .add("size", "10")
+//                .build();
+//        Request request = new Request.Builder()
+//                .url("https://api.douban.com/v2/book/search?q=python&fields=id,title")
+//                .get() //.post(formBody)
+//                .build();
+//        Call call = mOkHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.i("wangshu", e+"");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//                String str = response.body().string();
+//                Log.i("wangshu", str);
+//
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//
+//        });
+//    }
+
 }
