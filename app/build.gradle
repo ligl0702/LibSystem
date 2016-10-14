@@ -11,11 +11,15 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+
+
     }
 }
 
@@ -24,6 +28,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-
     compile 'cn.bmob.android:bmob-sdk:3.5.0'
+    compile files('libs/ViewPagerIndicator_1.1.2.jar')
+    compile 'com.zhy:okhttputils:2.3.5'
 }

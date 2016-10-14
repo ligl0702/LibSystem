@@ -35,6 +35,8 @@
 
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.BaseActivity" />
+        <activity android:name=".activity.BookTypeActivity" />
+
         <activity
             android:name=".activity.MainFragmentActivity"
             android:launchMode="singleTask" />

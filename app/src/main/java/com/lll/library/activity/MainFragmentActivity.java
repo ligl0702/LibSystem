@@ -1,5 +1,6 @@
 package com.lll.library.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -94,6 +95,7 @@ public class MainFragmentActivity extends FragmentActivity {
                 switch (tabId){
                     case TAB_ADD:
                         titleBar.setText("增加图书");
+                        startActivity(new Intent(MainFragmentActivity.this,BookTypeActivity.class));
                         break;
                     case TAB_DELETE:
                         titleBar.setText("删除");
