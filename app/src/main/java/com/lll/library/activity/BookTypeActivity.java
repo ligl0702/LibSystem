@@ -30,7 +30,6 @@ public class BookTypeActivity extends FragmentActivity implements View.OnClickLi
     private static final String TAG = "BookTypeActivity";
     private IndicatorViewPager indicatorViewPager;
     private TitleBar title_bar;
-    private LinearLayout mLlBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +61,7 @@ public class BookTypeActivity extends FragmentActivity implements View.OnClickLi
 
     // 初始化头布局
     private void initTitle() {
+        title_bar= (TitleBar) findViewById(R.id.title_bar);
         title_bar.setText("图书分类");
     }
 
