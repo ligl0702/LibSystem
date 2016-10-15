@@ -10,24 +10,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lll.library.R;
-import com.lll.library.utils.DisplayUtil;
+import com.lll.library.util.DisplayUtils;
 
 
 /**
  * 标题栏封装
- * 
+ *
  * @author wentaoli
  * @version [版本号, 2016年1月7日]
  * @see [相关类/方法]
  * @since [产品/模块版本]
  */
-public class TitleBar extends RelativeLayout
-{
+public class TitleBar extends RelativeLayout {
 
     /**
      * 解析text属性
      */
-    public static int[] TEXT_ATTR = new int[] {android.R.attr.text};
+    public static int[] TEXT_ATTR = new int[]{android.R.attr.text};
 
     /**
      * 标题textView
@@ -39,28 +38,22 @@ public class TitleBar extends RelativeLayout
      */
     private ImageView mRightIv = null;
 
-    public TitleBar(Context context)
-    {
+    public TitleBar(Context context) {
         this(context, null);
     }
 
-    public TitleBar(Context context, AttributeSet attrs)
-    {
+    public TitleBar(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public TitleBar(Context context, AttributeSet attrs, int defStyleAttr)
-    {
+    public TitleBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView();
-        try
-        {
+        try {
             TypedArray ta = context.obtainStyledAttributes(attrs, TEXT_ATTR);
             setText(ta.getText(0));
             ta.recycle();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -68,13 +61,11 @@ public class TitleBar extends RelativeLayout
 
     /**
      * 初始化界面元素
-     * 
+     *
      * @see [类、类#方法、类#成员]
      */
-    private void initView()
-    {
-        if (isInEditMode())
-        {
+    private void initView() {
+        if (isInEditMode()) {
             return;
         }
         View root = LayoutInflater.from(getContext()).inflate(R.layout.title_bar_layout, this, false);
@@ -83,35 +74,30 @@ public class TitleBar extends RelativeLayout
         mRightIv.setVisibility(View.GONE);
         mTitleTv.setSelected(true);
 
-        addView(root, LayoutParams.MATCH_PARENT, DisplayUtil.dip2px(getContext(), 44));
+        addView(root, LayoutParams.MATCH_PARENT, DisplayUtils.dp2px(getContext(), 44));
     }
 
     /**
      * 设置标题
-     * 
+     *
      * @param title
      * @see [类、类#方法、类#成员]
      */
-    public void setText(CharSequence title)
-    {
-        if (mTitleTv != null)
-        {
+    public void setText(CharSequence title) {
+        if (mTitleTv != null) {
             mTitleTv.setText(title);
         }
     }
 
     /**
      * 设置标题
-     * 
+     *
      * @param resId
      * @see [类、类#方法、类#成员]
      */
-    public void setText(int resId)
-    {
-        if (mTitleTv != null)
-        {
-            if (resId == 0)
-            {
+    public void setText(int resId) {
+        if (mTitleTv != null) {
+            if (resId == 0) {
                 mTitleTv.setText("");
                 return;
             }
@@ -121,37 +107,31 @@ public class TitleBar extends RelativeLayout
 
     /**
      * 设置返回按钮的可见性
-     * 
+     *
      * @param visibility
      * @see [类、类#方法、类#成员]
      */
-    public void setBackViewVisibility(int visibility)
-    {
+    public void setBackViewVisibility(int visibility) {
         View back = findViewById(R.id.title_bar_back);
-        if (back != null)
-        {
+        if (back != null) {
             back.setVisibility(visibility);
         }
     }
-    public void setHomeLogoVisibility(int visibility)
-    {
+
+    public void setHomeLogoVisibility(int visibility) {
         View logo = findViewById(R.id.title_bar_logo);
-        if (logo != null)
-        {
+        if (logo != null) {
             logo.setVisibility(visibility);
         }
     }
 
     /**
      * 设置右侧搜索按钮的可见性
-     * 
-     * @param visibility
+     *
      * @see [类、类#方法、类#成员]
      */
-    public void setRightImageView(int icon, OnClickListener l)
-    {
-        if (mRightIv == null)
-        {
+    public void setRightImageView(int icon, OnClickListener l) {
+        if (mRightIv == null) {
             return;
         }
         mRightIv.setVisibility(View.VISIBLE);

@@ -16,4 +16,8 @@ public interface Constant {
     public static final int QUERY_REQUEST_CODE = 102;
     //request code end
 
+    public static final String BOOK_TYPE = "bookType";
+    public static final String BOOK_TYPE_ID = "bookTypeId";
+    public static final String BOOK_TYPE_NAME = "bookTypeName";
+    public static final String BOOK_JSON_NAME = "books";
 }

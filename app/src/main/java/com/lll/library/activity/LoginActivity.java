@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             SpUtil.putBoolean(LoginActivity.this, Constant.IS_REMEMBER_PWD, false);
                         }
                         startActivity(new Intent(LoginActivity.this, MainFragmentActivity.class));
-                        finish();
+//                        finish();
                     } else {
                         showToast(e.getMessage());
                     }

@@ -8,11 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lll.library.R;
-import com.lll.library.view.layout.TitleBar;
 
 
 /**
- * Created by guoliangli on 2016/9/9.
+ * Created by guoliangli on 2016/9/9. 图书列表
  */
 public class UpdateFragment extends Fragment {
 

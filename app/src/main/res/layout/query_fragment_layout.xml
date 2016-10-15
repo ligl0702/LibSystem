@@ -3,22 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_alignParentTop="true"
-        android:id="@+id/tv_search"
+    <com.shizhefei.view.indicator.ScrollIndicatorView
+        android:id="@+id/moretab_indicator"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/search_bg"
-        android:drawableRight="@drawable/icon_search"
-        android:editable="false" />
+        android:layout_height="45dp" />
 
-    <ListView
-        android:id="@+id/lv_books"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_search"
-        android:layout_marginTop="5dp"></ListView>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/moretab_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/moretab_indicator" />
+
 </RelativeLayout>
