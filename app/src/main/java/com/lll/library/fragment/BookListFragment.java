@@ -29,8 +29,10 @@ import java.util.List;
 
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -50,20 +52,31 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
     private BookType mBookType;
     private ArrayList<Books> bookList;
 
+    private View contentView = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.book_list_fragment_layout, container, false);
-        mBooksLv = (ListView) view.findViewById(R.id.lv_books);
+        if (contentView == null) {
+            initView(inflater);
+        }
+        if (contentView.getParent() != null) {
+            ((ViewGroup) contentView.getParent()).removeView(contentView);
+        }
+
+        return contentView;
+    }
+
+    private void initView(LayoutInflater inflater) {
+        contentView = inflater.inflate(R.layout.book_list_fragment_layout, null);
+        mBooksLv = (ListView) contentView.findViewById(R.id.lv_books);
 
         mBookAdapter = new BooksAdapter(getActivity());
         mBooksLv.setAdapter(mBookAdapter);
         mBooksLv.setOnItemClickListener(this);
 
         getDataFromBundle();
-        requestBookInfo();
-
-        return view;
+        queryDataFromBmob();
     }
 
     private void getDataFromBundle() {
@@ -85,6 +98,22 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
             }
         });
         builder.show();
+    }
+
+    private void queryDataFromBmob() {
+        BmobQuery<Books> query = new BmobQuery<>();
+        query.addWhereEqualTo(Constant.TYPE_ID, mBookType.typeId);
+        query.setLimit(Constant.QUERY_LIMIT);
+        query.findObjects(new FindListener<Books>() {
+            @Override
+            public void done(List<Books> list, BmobException e) {
+                if (e == null) {
+                    mBookAdapter.setData(list);
+                } else {
+                    showToast(e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
     }
 
     private void requestBookInfo() {

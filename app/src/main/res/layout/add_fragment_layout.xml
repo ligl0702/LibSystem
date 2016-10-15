@@ -3,8 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp">
+    android:padding="15dp">
+
+    <Button
+        android:id="@+id/btn_bar_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_login_button"
+        android:text="扫描条形码/二维码"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_add_manually"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_login_button"
+        android:text="手动增加图书信息"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 
 </LinearLayout>

@@ -20,4 +20,7 @@ public interface Constant {
     public static final String BOOK_TYPE_ID = "bookTypeId";
     public static final String BOOK_TYPE_NAME = "bookTypeName";
     public static final String BOOK_JSON_NAME = "books";
+    public static final String TYPE_ID = "typeId";
+
+    public static final int QUERY_LIMIT = 50;
 }

@@ -30,22 +30,36 @@ import cn.bmob.v3.listener.SQLQueryListener;
 
 
 /**
- * Created by guoliangli on 2016/9/9.
+ * Created by guoliangli on 2016/9/9. 首页，主要是显示图片列表，查询的数据来源于豆瓣
  */
-public class QueryFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener {
     private IndicatorViewPager mIndicatorViewPager;
     private ViewPager mViewPager;
     private ScrollIndicatorView mScrollIndicatorView;
 
     private List<BookType> mBookTypeList = new ArrayList<>();
 
+    private View contentView = null;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.query_fragment_layout, container, false);
 
-        mViewPager = (ViewPager) view.findViewById(R.id.moretab_viewPager);
-        mScrollIndicatorView = (ScrollIndicatorView) view.findViewById(R.id.moretab_indicator);
+        if (contentView == null) {
+            initView(inflater);
+        }
+        if (contentView.getParent() != null) {
+            ((ViewGroup) contentView.getParent()).removeView(contentView);
+        }
+
+        return contentView;
+    }
+
+    private void initView(LayoutInflater inflater) {
+        contentView = inflater.inflate(R.layout.home_fragment_layout, null);
+
+        mViewPager = (ViewPager) contentView.findViewById(R.id.moretab_viewPager);
+        mScrollIndicatorView = (ScrollIndicatorView) contentView.findViewById(R.id.moretab_indicator);
 
         float unSelectSize = 12;
         float selectSize = unSelectSize * 1.3f;
@@ -56,8 +70,6 @@ public class QueryFragment extends Fragment implements View.OnClickListener {
         mIndicatorViewPager = new IndicatorViewPager(mScrollIndicatorView, mViewPager);
 
         requestBookType();
-
-        return view;
     }
 
     private void requestBookType() {
@@ -73,7 +85,7 @@ public class QueryFragment extends Fragment implements View.OnClickListener {
                         type0.typeId = "0";
                         type0.typeName = "推荐";
                         mBookTypeList.add(type0);
-                        for(BookType type: list){
+                        for (BookType type : list) {
                             mBookTypeList.add(type);
                         }
 
@@ -84,7 +96,6 @@ public class QueryFragment extends Fragment implements View.OnClickListener {
                 }
             }
         });
-
     }
 
     private void initData() {

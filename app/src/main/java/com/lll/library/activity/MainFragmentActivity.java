@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.lll.library.R;
 import com.lll.library.fragment.AddFragment;
 import com.lll.library.fragment.DeleteFragment;
-import com.lll.library.fragment.QueryFragment;
+import com.lll.library.fragment.HomeFragment;
 import com.lll.library.fragment.UpdateFragment;
 import com.lll.library.view.MainFragmentTabHost;
 import com.lll.library.view.TabManager;
@@ -25,6 +25,12 @@ import com.lll.library.view.layout.TitleBar;
 public class MainFragmentActivity extends FragmentActivity {
     private static final String TAG = "MainFragmentActivity";
     private MainFragmentTabHost mTabHost;
+
+    /**
+     * 首页
+     */
+    public static final String TAB_HOME = "home";
+
     /**
      * 增加数据
      */
@@ -40,10 +46,6 @@ public class MainFragmentActivity extends FragmentActivity {
      */
     public static final String TAB_UPDATE = "update";
 
-    /**
-     * 查询数据
-     */
-    public static final String TAB_QUERY = "query";
 
     private TitleBar titleBar;
 
@@ -62,6 +64,10 @@ public class MainFragmentActivity extends FragmentActivity {
         mTabHost = (MainFragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
 
+        View menuHome = getLayoutInflater().inflate(R.layout.main_tab_item, null);
+        ((TextView) menuHome.findViewById(R.id.text)).setText(R.string.home_home);
+        ((ImageView) menuHome.findViewById(R.id.img)).setImageResource(R.drawable.tab_home);
+
         View menuAdd = getLayoutInflater().inflate(R.layout.main_tab_item, null);
         ((TextView) menuAdd.findViewById(R.id.text)).setText(R.string.home_add);
         ((ImageView) menuAdd.findViewById(R.id.img)).setImageResource(R.drawable.tab_home);
@@ -74,11 +80,7 @@ public class MainFragmentActivity extends FragmentActivity {
         ((TextView) menuUpdate.findViewById(R.id.text)).setText(R.string.home_update);
         ((ImageView) menuUpdate.findViewById(R.id.img)).setImageResource(R.drawable.tab_test);
 
-        View menuQuery = getLayoutInflater().inflate(R.layout.main_tab_item, null);
-        ((TextView) menuQuery.findViewById(R.id.text)).setText(R.string.home_query);
-        ((ImageView) menuQuery.findViewById(R.id.img)).setImageResource(R.drawable.tab_mine);
-
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_QUERY).setIndicator(menuQuery), QueryFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_HOME).setIndicator(menuHome), HomeFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(TAB_ADD).setIndicator(menuAdd), AddFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(TAB_UPDATE).setIndicator(menuUpdate), UpdateFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(TAB_DELETE).setIndicator(menuDelete), DeleteFragment.class, null);
@@ -92,18 +94,21 @@ public class MainFragmentActivity extends FragmentActivity {
 
             @Override
             public void onTabChanged(String tabId) {
-                switch (tabId){
+                switch (tabId) {
                     case TAB_ADD:
                         titleBar.setText("增加图书");
-                        startActivity(new Intent(MainFragmentActivity.this,BookTypeActivity.class));
+
                         break;
+
                     case TAB_DELETE:
                         titleBar.setText("删除");
                         break;
+
                     case TAB_UPDATE:
                         titleBar.setText("修改");
                         break;
-                    case TAB_QUERY:
+
+                    case TAB_HOME:
                         titleBar.setText("图书管理系统");
                         break;
                 }

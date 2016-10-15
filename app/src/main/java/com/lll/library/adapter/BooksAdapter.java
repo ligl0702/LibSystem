@@ -26,7 +26,7 @@ public class BooksAdapter extends CommonAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.query_book_item, null);
+            convertView = View.inflate(context, R.layout.book_item, null);
         }
 
         Books book = (Books) getItem(position);
