@@ -17,11 +17,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_main_tab">MainTabActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
-    <string name="home_add">增加</string>
-    <string name="home_delete">删除</string>
-    <string name="home_update">修改</string>
-    <string name="home_query">查询</string>
     <string name="home_home">首页</string>
+    <string name="home_add">录入</string>
+    <string name="home_search">搜索</string>
+    <string name="home_mine">我的</string>
 
     <string name="app_name">图书管理系统</string>
     <string name="action_settings">Settings</string>

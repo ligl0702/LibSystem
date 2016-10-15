@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.zxing.Result;
 import com.lll.library.R;
 import com.lll.library.util.Constant;
@@ -63,18 +64,12 @@ public final class CommonScanActivity extends Activity implements ScanListener, 
     Button rescan;
     @Bind(R.id.scan_image)
     ImageView scan_image;
-    @Bind(R.id.authorize_return)
-    ImageView authorize_return;
     private int scanMode;//扫描模型（条形，二维码，全部）
 
-    @Bind(R.id.common_title_TV_center)
-    TextView title;
     @Bind(R.id.scan_hint)
     TextView scan_hint;
     @Bind(R.id.tv_scan_result)
     TextView tv_scan_result;
-
-
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -84,22 +79,19 @@ public final class CommonScanActivity extends Activity implements ScanListener, 
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_scan_code);
         ButterKnife.bind(this);
-        scanMode=getIntent().getIntExtra(Constant.REQUEST_SCAN_MODE,Constant.REQUEST_SCAN_MODE_ALL_MODE);
+        scanMode = getIntent().getIntExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
         initView();
     }
 
     void initView() {
-        switch (scanMode){
+        switch (scanMode) {
             case DecodeThread.BARCODE_MODE:
-                title.setText(R.string.scan_barcode_title);
                 scan_hint.setText(R.string.scan_barcode_hint);
                 break;
             case DecodeThread.QRCODE_MODE:
-                title.setText(R.string.scan_qrcode_title);
                 scan_hint.setText(R.string.scan_qrcode_hint);
                 break;
             case DecodeThread.ALL_MODE:
-                title.setText(R.string.scan_allcode_title);
                 scan_hint.setText(R.string.scan_allcode_hint);
                 break;
         }
@@ -114,9 +106,9 @@ public final class CommonScanActivity extends Activity implements ScanListener, 
         iv_light = (TextView) findViewById(R.id.iv_light);
         iv_light.setOnClickListener(this);
         rescan.setOnClickListener(this);
-        authorize_return.setOnClickListener(this);
+
         //构造出扫描管理器
-        scanManager = new ScanManager(this, scanPreview, scanContainer, scanCropView, scanLine, scanMode,this);
+        scanManager = new ScanManager(this, scanPreview, scanContainer, scanCropView, scanLine, scanMode, this);
     }
 
     @Override
@@ -132,6 +124,7 @@ public final class CommonScanActivity extends Activity implements ScanListener, 
         super.onPause();
         scanManager.onPause();
     }
+
     /**
      *
      */
@@ -155,7 +148,11 @@ public final class CommonScanActivity extends Activity implements ScanListener, 
         rescan.setVisibility(View.VISIBLE);
         scan_image.setVisibility(View.VISIBLE);
         tv_scan_result.setVisibility(View.VISIBLE);
-        tv_scan_result.setText("结果："+rawResult.getText());
+        tv_scan_result.setText("结果：" + rawResult.getText());
+
+        Intent intent = new Intent(this, AddBookActivity.class);
+        intent.putExtra(Constant.SCAN_EXTRA_RESULT, rawResult.getText());
+        startActivity(intent);
     }
 
     void startScan() {
@@ -170,7 +167,7 @@ public final class CommonScanActivity extends Activity implements ScanListener, 
     public void scanError(Exception e) {
         Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         //相机扫描出错时
-        if(e.getMessage()!=null&&e.getMessage().startsWith("相机")){
+        if (e.getMessage() != null && e.getMessage().startsWith("相机")) {
             scanPreview.setVisibility(View.INVISIBLE);
         }
     }

@@ -8,19 +8,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lll.library.R;
-import com.lll.library.view.layout.TitleBar;
 
 
 /**
- * Created by guoliangli on 2016/9/9.
+ * Created by guoliangli on 2016/9/9. 搜索圖書
  */
-public class DeleteFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_fragment_layout, container, false);
+        View view = inflater.inflate(R.layout.search_fragment_layout, container, false);
         return view;
     }
 }

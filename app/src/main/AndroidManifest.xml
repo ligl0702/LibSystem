@@ -17,9 +17,11 @@
 
     <!-- 二维码相关权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.camera.flash" />
+
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="com.android.browser.permission.READ_HISTORY_BOOKMARKS" />
@@ -47,13 +49,14 @@
 
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.BaseActivity" />
-        <activity android:name=".activity.BookTypeActivity" />
 
         <activity
             android:name=".activity.MainFragmentActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.QueryConditionActivity" />
-        <activity android:name=".activity.AddBookActivity" />
+        <activity
+            android:name=".activity.AddBookActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
 
         <activity android:name=".activity.CommonScanActivity" />

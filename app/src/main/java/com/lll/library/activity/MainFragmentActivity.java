@@ -1,6 +1,5 @@
 package com.lll.library.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -11,9 +10,9 @@ import android.widget.TextView;
 
 import com.lll.library.R;
 import com.lll.library.fragment.AddFragment;
-import com.lll.library.fragment.DeleteFragment;
+import com.lll.library.fragment.MineFragment;
 import com.lll.library.fragment.HomeFragment;
-import com.lll.library.fragment.UpdateFragment;
+import com.lll.library.fragment.SearchFragment;
 import com.lll.library.view.MainFragmentTabHost;
 import com.lll.library.view.TabManager;
 import com.lll.library.view.layout.TitleBar;
@@ -37,19 +36,15 @@ public class MainFragmentActivity extends FragmentActivity {
     public static final String TAB_ADD = "add";
 
     /**
-     * 删除数据
-     */
-    public static final String TAB_DELETE = "delete";
-
-    /**
-     * 修改数据
-     */
-    public static final String TAB_UPDATE = "update";
-
-    /**
      * 查询数据
      */
-    public static final String TAB_QUERY = "query";
+    public static final String TAB_SEARCH = "search";
+
+    /**
+     * 我的
+     */
+    public static final String TAB_MINE = "mine";
+
 
     private TitleBar titleBar;
 
@@ -63,7 +58,7 @@ public class MainFragmentActivity extends FragmentActivity {
 
     private void initViews() {
         titleBar = (TitleBar) findViewById(R.id.title_bar);
-        titleBar.setText("图书管理系统");
+        titleBar.setText("图书浏览");
         titleBar.setBackViewVisibility(View.GONE);
         mTabHost = (MainFragmentTabHost) findViewById(android.R.id.tabhost);
         mTabHost.setup(this, getSupportFragmentManager(), R.id.realtabcontent);
@@ -74,20 +69,20 @@ public class MainFragmentActivity extends FragmentActivity {
 
         View menuAdd = getLayoutInflater().inflate(R.layout.main_tab_item, null);
         ((TextView) menuAdd.findViewById(R.id.text)).setText(R.string.home_add);
-        ((ImageView) menuAdd.findViewById(R.id.img)).setImageResource(R.drawable.tab_home);
+        ((ImageView) menuAdd.findViewById(R.id.img)).setImageResource(R.drawable.tab_ask);
 
-        View menuDelete = getLayoutInflater().inflate(R.layout.main_tab_item, null);
-        ((TextView) menuDelete.findViewById(R.id.text)).setText(R.string.home_delete);
-        ((ImageView) menuDelete.findViewById(R.id.img)).setImageResource(R.drawable.tab_ask);
+        View menuSearch = getLayoutInflater().inflate(R.layout.main_tab_item, null);
+        ((TextView) menuSearch.findViewById(R.id.text)).setText(R.string.home_search);
+        ((ImageView) menuSearch.findViewById(R.id.img)).setImageResource(R.drawable.tab_test);
 
-        View menuUpdate = getLayoutInflater().inflate(R.layout.main_tab_item, null);
-        ((TextView) menuUpdate.findViewById(R.id.text)).setText(R.string.home_update);
-        ((ImageView) menuUpdate.findViewById(R.id.img)).setImageResource(R.drawable.tab_test);
+        View menuMine = getLayoutInflater().inflate(R.layout.main_tab_item, null);
+        ((TextView) menuMine.findViewById(R.id.text)).setText(R.string.home_mine);
+        ((ImageView) menuMine.findViewById(R.id.img)).setImageResource(R.drawable.tab_mine);
 
         mTabHost.addTab(mTabHost.newTabSpec(TAB_HOME).setIndicator(menuHome), HomeFragment.class, null);
         mTabHost.addTab(mTabHost.newTabSpec(TAB_ADD).setIndicator(menuAdd), AddFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_UPDATE).setIndicator(menuUpdate), UpdateFragment.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec(TAB_DELETE).setIndicator(menuDelete), DeleteFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_SEARCH).setIndicator(menuSearch), SearchFragment.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec(TAB_MINE).setIndicator(menuMine), MineFragment.class, null);
 
         //去掉分隔的竖线
         mTabHost.getTabWidget().setShowDividers(LinearLayout.SHOW_DIVIDER_NONE);
@@ -99,21 +94,23 @@ public class MainFragmentActivity extends FragmentActivity {
             @Override
             public void onTabChanged(String tabId) {
                 switch (tabId) {
+                    case TAB_HOME:
+                        titleBar.setText("浏览图书");
+                        break;
+
                     case TAB_ADD:
-                        titleBar.setText("增加图书");
+                        titleBar.setText("录入图书");
 
                         break;
 
-                    case TAB_DELETE:
-                        titleBar.setText("删除");
+                    case TAB_SEARCH:
+                        titleBar.setText("搜索图书");
                         break;
 
-                    case TAB_UPDATE:
-                        titleBar.setText("修改");
+                    case TAB_MINE:
+                        titleBar.setText("我的");
                         break;
-                    case TAB_QUERY:
-                        titleBar.setText("图书管理系统");
-                        break;
+
                 }
                 TabManager.getInstance().setCurrentTab(tabId);
             }

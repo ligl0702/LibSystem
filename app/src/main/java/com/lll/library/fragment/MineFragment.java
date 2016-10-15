@@ -8,18 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lll.library.R;
+import com.lll.library.view.layout.TitleBar;
 
 
 /**
- * Created by guoliangli on 2016/9/9. 图书列表
+ * Created by guoliangli on 2016/9/9.
  */
-public class UpdateFragment extends Fragment {
+public class MineFragment extends Fragment {
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.add_fragment_layout, container, false);
+        View view = inflater.inflate(R.layout.mine_fragment_layout, container, false);
         return view;
     }
 }

@@ -36,7 +36,7 @@ public class TitleBar extends RelativeLayout {
     /**
      * 右侧按钮, 默认不显示
      */
-    private ImageView mRightIv = null;
+    private TextView mRightTv = null;
 
     public TitleBar(Context context) {
         this(context, null);
@@ -70,8 +70,8 @@ public class TitleBar extends RelativeLayout {
         }
         View root = LayoutInflater.from(getContext()).inflate(R.layout.title_bar_layout, this, false);
         mTitleTv = (TextView) root.findViewById(R.id.title_bar_title);
-        mRightIv = (ImageView) root.findViewById(R.id.title_bar_right_iv);
-        mRightIv.setVisibility(View.GONE);
+        mRightTv = (TextView) root.findViewById(R.id.title_bar_right_tv);
+        mRightTv.setVisibility(View.GONE);
         mTitleTv.setSelected(true);
 
         addView(root, LayoutParams.MATCH_PARENT, DisplayUtils.dp2px(getContext(), 44));
@@ -130,13 +130,12 @@ public class TitleBar extends RelativeLayout {
      *
      * @see [类、类#方法、类#成员]
      */
-    public void setRightImageView(int icon, OnClickListener l) {
-        if (mRightIv == null) {
+    public void setRightTextView(OnClickListener l) {
+        if (mRightTv == null) {
             return;
         }
-        mRightIv.setVisibility(View.VISIBLE);
-        mRightIv.setImageResource(icon);
-        mRightIv.setOnClickListener(l);
+        mRightTv.setVisibility(View.VISIBLE);
+        mRightTv.setOnClickListener(l);
     }
 
 

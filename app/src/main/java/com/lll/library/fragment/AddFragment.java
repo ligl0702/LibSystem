@@ -67,8 +67,8 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                                 @Override
                                 public void onPermissionGranted(String... strings) {
                                     Intent intent = new Intent(getActivity(), CommonScanActivity.class);
-                                    intent.putExtra(Constant.REQUEST_SCAN_MODE,Constant.REQUEST_SCAN_MODE_ALL_MODE);
-                                    startActivity(intent);
+                                    intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
+                                    startActivityForResult(intent, Constant.SCAN_REQUEST_CODE);
                                 }
 
                                 @Override
@@ -81,14 +81,11 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
                                 }
                             });
-                }else{
+                } else {
                     Intent intent = new Intent(getActivity(), CommonScanActivity.class);
-                    intent.putExtra(Constant.REQUEST_SCAN_MODE,Constant.REQUEST_SCAN_MODE_ALL_MODE);
+                    intent.putExtra(Constant.REQUEST_SCAN_MODE, Constant.REQUEST_SCAN_MODE_ALL_MODE);
                     startActivity(intent);
                 }
-
-
-
                 break;
 
             case R.id.btn_add_manually:
@@ -96,4 +93,5 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
 }
