@@ -28,5 +28,7 @@ dependencies {
     compile 'cn.bmob.android:bmob-sdk:3.5.0'
     compile files('libs/ViewPagerIndicator_1.1.2.jar')
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.github.yxping:EasyPermissionUtil:v0.1.0'
+    compile files('libs/butterknife-7.0.1.jar')
+    compile files('libs/zxing.jar')
 }

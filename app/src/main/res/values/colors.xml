@@ -89,7 +89,7 @@
     <!-- divider -->
     <color name="divider_1">#e2e2e2</color>
     <color name="divider_2">#e6e6e6</color>
-
+    <color name="scan_bg">#7f000000</color>
 
 
 

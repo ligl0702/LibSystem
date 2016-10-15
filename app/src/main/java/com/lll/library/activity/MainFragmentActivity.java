@@ -46,6 +46,10 @@ public class MainFragmentActivity extends FragmentActivity {
      */
     public static final String TAB_UPDATE = "update";
 
+    /**
+     * 查询数据
+     */
+    public static final String TAB_QUERY = "query";
 
     private TitleBar titleBar;
 
@@ -107,8 +111,7 @@ public class MainFragmentActivity extends FragmentActivity {
                     case TAB_UPDATE:
                         titleBar.setText("修改");
                         break;
-
-                    case TAB_HOME:
+                    case TAB_QUERY:
                         titleBar.setText("图书管理系统");
                         break;
                 }

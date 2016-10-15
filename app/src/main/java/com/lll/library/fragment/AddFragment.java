@@ -1,6 +1,8 @@
 package com.lll.library.fragment;
 
+import android.Manifest;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,10 @@ import android.widget.Button;
 
 import com.lll.library.R;
 import com.lll.library.activity.AddBookActivity;
+import com.lll.library.activity.CommonScanActivity;
+import com.lll.library.util.Constant;
+import com.yxp.permission.util.lib.PermissionUtil;
+import com.yxp.permission.util.lib.callback.PermissionResultCallBack;
 
 
 /**
@@ -49,6 +55,39 @@ public class AddFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_bar_code:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    PermissionUtil.getInstance().request(new String[]{Manifest.permission.CAMERA},
+                            new PermissionResultCallBack() {
+
+                                @Override
+                                public void onPermissionGranted() {
+
+                                }
+
+                                @Override
+                                public void onPermissionGranted(String... strings) {
+                                    Intent intent = new Intent(getActivity(), CommonScanActivity.class);
+                                    intent.putExtra(Constant.REQUEST_SCAN_MODE,Constant.REQUEST_SCAN_MODE_ALL_MODE);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void onPermissionDenied(String... strings) {
+
+                                }
+
+                                @Override
+                                public void onRationalShow(String... strings) {
+
+                                }
+                            });
+                }else{
+                    Intent intent = new Intent(getActivity(), CommonScanActivity.class);
+                    intent.putExtra(Constant.REQUEST_SCAN_MODE,Constant.REQUEST_SCAN_MODE_ALL_MODE);
+                    startActivity(intent);
+                }
+
+
 
                 break;
 
