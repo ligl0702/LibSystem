@@ -15,12 +15,12 @@ import android.widget.Toast;
 
 import com.lll.library.R;
 import com.lll.library.adapter.BooksAdapter;
+import com.lll.library.adapter.BooksBorrowAdapter;
 import com.lll.library.entity.Books;
 import com.lll.library.entity.BorrowBook;
 import com.lll.library.entity.MyUser;
-import com.lll.library.util.Constant;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -34,7 +34,7 @@ import cn.bmob.v3.listener.FindListener;
  */
 public class BorrowFragment extends Fragment implements AdapterView.OnItemClickListener {
     private ListView mBooksLv;
-    private BooksAdapter mBookAdapter;
+    private BooksBorrowAdapter mBookAdapter;
 
     private View contentView = null;
     private String[] bookIds;
@@ -49,8 +49,6 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
             ((ViewGroup) contentView.getParent()).removeView(contentView);
         }
 
-        queryDataFromBmob();
-
         return contentView;
     }
 
@@ -58,9 +56,11 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
         contentView = inflater.inflate(R.layout.book_list_fragment_layout, null);
         mBooksLv = (ListView) contentView.findViewById(R.id.lv_books);
 
-        mBookAdapter = new BooksAdapter(getActivity());
+        mBookAdapter = new BooksBorrowAdapter(getActivity());
         mBooksLv.setAdapter(mBookAdapter);
         mBooksLv.setOnItemClickListener(this);
+
+        queryDataFromBmob();
     }
 
     private void queryDataFromBmob() {
@@ -92,7 +92,14 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
 
     private void queryBorrowBooks() {
         BmobQuery<Books> query = new BmobQuery<>();
-        query.addWhereContainedIn(Constant.QUERY_CONDITION_TITLE, Arrays.asList(bookIds));
+        List<BmobQuery<Books>> queries = new ArrayList<>();
+        for (int i = 0; i < bookIds.length; i++) {
+            BmobQuery<Books> query0 = new BmobQuery<>();
+            query0.addWhereEqualTo("bookId", bookIds[i]);
+            queries.add(query0);
+        }
+        query.or(queries);
+//        query.addWhereContainedIn(Constant.QUERY_CONDITION_TITLE, Arrays.asList(bookIds));
         query.findObjects(new FindListener<Books>() {
             @Override
             public void done(List<Books> list, BmobException e) {
