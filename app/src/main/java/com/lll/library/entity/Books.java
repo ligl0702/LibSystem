@@ -15,4 +15,5 @@ public class Books extends BmobObject {
     public String summary;
     public String image;
     public String typeId;
+    public String borrow = "0";//是否被借阅，1被借阅，0未借阅
 }

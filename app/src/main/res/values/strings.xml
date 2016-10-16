@@ -34,5 +34,8 @@
     <string name="loading">加载中&#8230;</string>
     <string name="book_author">%s[编著]</string>
     <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
     <string name="book_introduction">图书简介</string>
+    <string name="book_confirm_borrow_tip">确认借阅此书？</string>
+    <string name="has_been_borrowed">已借阅</string>
 </resources>

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,10 @@ import com.lll.library.R;
 import com.lll.library.adapter.BooksAdapter;
 import com.lll.library.entity.BookType;
 import com.lll.library.entity.Books;
+import com.lll.library.entity.BorrowBook;
+import com.lll.library.entity.MyUser;
 import com.lll.library.util.Constant;
+import com.lll.library.util.MyLoadingDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,10 +34,12 @@ import java.util.List;
 import cn.bmob.v3.BmobBatch;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BatchResult;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.QueryListListener;
+import cn.bmob.v3.listener.SaveListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -53,6 +59,7 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
     private ArrayList<Books> bookList;
 
     private View contentView = null;
+    private int selectPosition = -1;
 
     @Nullable
     @Override
@@ -74,6 +81,29 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
         mBookAdapter = new BooksAdapter(getActivity());
         mBooksLv.setAdapter(mBookAdapter);
         mBooksLv.setOnItemClickListener(this);
+
+        mBookAdapter.setBorrowListener(new BooksAdapter.BorrowListener() {
+            @Override
+            public void borrow(final int position, final Books book) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(book.title);
+                builder.setMessage(getString(R.string.book_confirm_borrow_tip));
+                builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        borrowBookToBmob(book);
+                        selectPosition = position;
+                    }
+                });
+                builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
 
         getDataFromBundle();
         queryDataFromBmob();
@@ -204,6 +234,33 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
                         }
                     }
                 }
+            }
+        });
+    }
+
+    private void borrowBookToBmob(Books book) {
+        MyLoadingDialog.showLoading(getActivity());
+
+        String userId = BmobUser.getCurrentUser(MyUser.class).getUsername();
+        BorrowBook borrowBook = new BorrowBook();
+        borrowBook.userId = userId;
+        borrowBook.bookId = book.bookId;
+
+        borrowBook.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                MyLoadingDialog.dismissLoading();
+
+                if (e == null) {
+                    if (!TextUtils.isEmpty(s)) {
+                        showToast(s + "借阅成功！");
+                    }
+                } else {
+                    showToast(e.getMessage() + "," + e.getErrorCode());
+                }
+
+                ((Books) mBookAdapter.getItem(selectPosition)).borrow = "1";
+                mBookAdapter.notifyDataSetChanged();
             }
         });
     }
