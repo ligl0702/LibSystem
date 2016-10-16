@@ -7,10 +7,19 @@
     android:paddingLeft="15dp"
     android:paddingRight="15dp">
 
+    <ImageView
+        android:id="@+id/login_logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/book_logo" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:background="@color/common_login_line" />
 
     <RelativeLayout
@@ -62,6 +71,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/img_password"
             android:background="@null"
+            android:inputType="numberPassword"
             android:hint="请输入密码"
             android:paddingLeft="12dp"
             tools:text="123456" />
@@ -71,6 +81,29 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="@color/common_login_line" />
+
+    <RadioGroup
+        android:id="@+id/rg_role"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_administrator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="管理员" />
+
+        <RadioButton
+            android:id="@+id/rb_reader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="读者" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/btn_register"

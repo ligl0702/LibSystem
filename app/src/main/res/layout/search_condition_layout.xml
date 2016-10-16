@@ -2,20 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="15dp">
+    android:orientation="vertical">
+
+    <com.lll.library.view.layout.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/common_green"
+        android:text="图书搜索条件" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="题名"
+            android:gravity="right"
+            android:text="题名："
             android:textSize="20sp" />
 
         <EditText
@@ -28,15 +35,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_margin="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="作者"
+            android:gravity="right"
+            android:text="作者："
             android:textSize="20sp" />
 
         <EditText
@@ -49,15 +56,15 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_margin="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:paddingRight="10dp"
-            android:text="出版社"
+            android:gravity="right"
+            android:text="出版社："
             android:textSize="20sp" />
 
         <EditText
@@ -71,6 +78,8 @@
         android:id="@+id/btn_query"
         android:layout_width="match_parent"
         android:layout_height="44dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/bg_login_button"
         android:text="查询"

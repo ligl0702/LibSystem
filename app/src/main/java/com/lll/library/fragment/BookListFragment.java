@@ -77,6 +77,7 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
 
         getDataFromBundle();
         queryDataFromBmob();
+//        requestBookInfo();
     }
 
     private void getDataFromBundle() {
@@ -122,8 +123,8 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
                 .add("size", "10")
                 .build();
         Request request = new Request.Builder()
-                .url("https://api.douban.com/v2/book/search?tag=" + mBookType.typeName +
-                        "&fields=isbn13,title,images,author,publisher,pubdate,summary")
+                .url("https://api.douban.com/v2/book/search?tag=" + mBookType.typeName + "&count=50" +
+                        "&fields=id,isbn13,title,images,author,publisher,pubdate,summary")
                 .get() //.post(formBody)
                 .build();
         Call call = mOkHttpClient.newCall(request);
@@ -144,6 +145,7 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
                             bookList = new ArrayList<>(size);
                             for (int i = 0; i < size; i++) {
                                 Books book = new Books();
+                                book.bookId = booksArray.getJSONObject(i).getString("id");
                                 book.ISBN = booksArray.getJSONObject(i).getString("isbn13");
                                 book.title = booksArray.getJSONObject(i).getString("title");
                                 if (booksArray.getJSONObject(i).getJSONArray("author").length() > 0) {
@@ -165,7 +167,7 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
                                 public void run() {
                                     mBookAdapter.setData(bookList);
 
-                                    //addBookDataToBmob(bookList);
+                                    addBookDataToBmob(bookList);
                                 }
                             });
                         }
@@ -186,18 +188,18 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
         }
         BmobBatch batch = new BmobBatch();
         batch.insertBatch(books);
-        batch.doBatch(new QueryListListener<BatchResult>() {
+        batch.doBatch(new QueryListListener<BatchResult>() {//批量操作每次只支持最大50条记录的操作。
             @Override
             public void done(List<BatchResult> results, BmobException e) {
                 if (e == null) {
                     for (int i = 0; i < results.size(); i++) {
                         BatchResult result = results.get(i);
-//                        if (result.isSuccess()) {//只有批量添加才返回objectId
-//                            showToast("第" + i + "个成功：" + result.getObjectId() + "," + result.getUpdatedAt());
-//                        } else {
-//                            BmobException error = result.getError();
-//                            showToast("第" + i + "个失败：" + error.getErrorCode() + "," + error.getMessage());
-//                        }
+                        if (result.isSuccess()) {//只有批量添加才返回objectId
+                            showToast("第" + i + "个成功：" + result.getObjectId() + "," + result.getUpdatedAt());
+                        } else {
+                            BmobException error = result.getError();
+                            showToast("第" + i + "个失败：" + error.getErrorCode() + "," + error.getMessage());
+                        }
                     }
                 }
             }

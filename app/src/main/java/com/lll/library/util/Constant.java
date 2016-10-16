@@ -40,6 +40,9 @@ public interface Constant {
 
     public static final String USER_NAME = "userName";
     public static final String USER_PWD = "userPwd";
+    public static final String USER_ROLE = "userRole";
+    public static final String ROLE_ADMIN = "1";//管理员
+    public static final String ROLE_READER = "0";//读者
     public static final String IS_REMEMBER_PWD = "isRememberPwd";
     public static final int REGISTER_EXIST_ERROR_CODE = 202;
 
@@ -61,4 +64,8 @@ public interface Constant {
     public static final int QUERY_LIMIT = 50;
 
     public static final String SCAN_EXTRA_RESULT = "scanResult";
+
+    public static final String QUERY_CONDITION_TITLE = "title";
+    public static final String QUERY_CONDITION_AUTOR = "author";
+    public static final String QUERY_CONDITION_PUBLISHER = "publisher";
 }

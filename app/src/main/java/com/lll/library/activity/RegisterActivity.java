@@ -9,9 +9,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.lll.library.R;
+import com.lll.library.entity.MyUser;
 import com.lll.library.util.Constant;
 import com.lll.library.util.MyLoadingDialog;
 
@@ -26,6 +29,12 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     private Button mRegisterBtn;
     private EditText mLoginNameEt;
     private EditText mLoginPwdEt;
+
+    private RadioGroup mRoleRg;//角色，管理员1/读者0
+    private RadioButton mAdminRb;//管理员1
+    private RadioButton mReaderRb;//读者0
+
+    private String mRole;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +51,39 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         mLoginNameEt = (EditText) findViewById(R.id.et_name);
         mLoginPwdEt = (EditText) findViewById(R.id.et_password);
 
+        mRoleRg = (RadioGroup) findViewById(R.id.rg_role);
+        mAdminRb = (RadioButton) findViewById(R.id.rb_administrator);
+        mReaderRb = (RadioButton) findViewById(R.id.rb_reader);
+        mRoleRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.rb_administrator:
+                        mRole = "1";
+                        break;
+
+                    case R.id.rb_reader:
+                        mRole = "0";
+                        break;
+                }
+            }
+        });
+
     }
 
     private void register() {
         if (validate()) {
             MyLoadingDialog.showLoading(this);
 
-            BmobUser user = new BmobUser();
+            MyUser user = new MyUser();
             user.setUsername(mLoginNameEt.getText().toString().trim());
             user.setPassword(mLoginPwdEt.getText().toString().trim());
+            user.role = mRole;
 
             //注意：不能用save方法进行注册
-            user.signUp(new SaveListener<BmobUser>() {
+            user.signUp(new SaveListener<MyUser>() {
                 @Override
-                public void done(final BmobUser o, BmobException e) {
+                public void done(final MyUser o, BmobException e) {
                     MyLoadingDialog.dismissLoading();
 
                     if (e == null) {

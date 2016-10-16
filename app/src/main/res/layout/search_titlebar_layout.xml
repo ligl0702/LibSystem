@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="44dip"
-    android:background="@color/common_green" >
+    android:background="@color/common_green">
 
     <TextView
         android:id="@+id/title_bar_title"
@@ -29,15 +29,14 @@
         android:id="@+id/title_bar_logo"
         style="@style/logo_style"
         android:src="@drawable/home_logo"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
 
     <ImageView
         android:id="@+id/title_bar_right_iv"
         style="@style/titlebar_right"
         android:layout_alignParentRight="true"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/tips" />
+        android:src="@drawable/icon_search" />
 
     <View
         android:layout_width="match_parent"

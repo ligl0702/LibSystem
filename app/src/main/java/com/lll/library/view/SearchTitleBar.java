@@ -61,7 +61,6 @@ public class SearchTitleBar extends RelativeLayout {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -144,6 +143,11 @@ public class SearchTitleBar extends RelativeLayout {
         mRightIv.setOnClickListener(l);
     }
 
-
+    public void setRightImageViewGone(boolean isVisiable) {
+        if (mRightIv == null) {
+            return;
+        }
+        mRightIv.setVisibility(isVisiable ? VISIBLE : GONE);
+    }
 }
 

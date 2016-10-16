@@ -6,6 +6,7 @@ import cn.bmob.v3.BmobObject;
  * Created by LLL on 2016/10/12. 图书表
  */
 public class Books extends BmobObject {
+    public String bookId;
     public String ISBN;
     public String title;
     public String author;

@@ -129,7 +129,7 @@ public class AddBookActivity extends Activity {
                     .build();
             Request request = new Request.Builder()
                     .url("https://api.douban.com/v2/book/search?q=" + mISBNFromScan +
-                            "&fields=isbn13,title,images,author,publisher,pubdate,summary")
+                            "&fields=id,isbn13,title,images,author,publisher,pubdate,summary")
                     .get() //.post(formBody)
                     .build();
             Call call = mOkHttpClient.newCall(request);
@@ -147,6 +147,7 @@ public class AddBookActivity extends Activity {
                             JSONArray booksArray = jsonObject.getJSONArray(Constant.BOOK_JSON_NAME);
                             if (booksArray.length() > 0) {
                                 mBook = new Books();
+                                mBook.bookId = booksArray.getJSONObject(0).getString("id");
                                 mBook.ISBN = booksArray.getJSONObject(0).getString("isbn13");
                                 mBook.title = booksArray.getJSONObject(0).getString("title");
                                 if (booksArray.getJSONObject(0).getJSONArray("author").length() > 0) {

@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
 //            case R.id.tv_search:
-//                Intent intent = new Intent(getActivity(), QueryConditionActivity.class);
+//                Intent intent = new Intent(getActivity(), SearchConditionActivity.class);
 //                startActivityForResult(intent, Constant.QUERY_REQUEST_CODE);
 //                break;
 

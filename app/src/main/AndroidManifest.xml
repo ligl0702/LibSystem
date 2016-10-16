@@ -53,13 +53,16 @@
         <activity
             android:name=".activity.MainFragmentActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".activity.QueryConditionActivity" />
+        <activity android:name=".activity.SearchConditionActivity" />
         <activity
             android:name=".activity.AddBookActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
-
         <activity android:name=".activity.CommonScanActivity" />
+
+        <activity
+            android:name=".activity.SearchResultActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
     </application>
 

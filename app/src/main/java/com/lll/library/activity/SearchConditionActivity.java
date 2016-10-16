@@ -1,8 +1,8 @@
 package com.lll.library.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +15,7 @@ import com.lll.library.util.Constant;
 /**
  * 查询条件
  */
-public class QueryConditionActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchConditionActivity extends Activity implements View.OnClickListener {
     private Button mQueryBtn;
     private EditText mBookNameEt;
     private EditText mBookPressEt;
@@ -24,7 +24,7 @@ public class QueryConditionActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.query_condition_layout);
+        setContentView(R.layout.search_condition_layout);
 
         initView();
 
@@ -45,13 +45,13 @@ public class QueryConditionActivity extends AppCompatActivity implements View.On
                 || !TextUtils.isEmpty(mBookPressEt.getText().toString().trim())) {
             queryConditionObj = new QueryConditionObj();
 
-            queryConditionObj.conditionName = mBookNameEt.getText().toString().trim();
+            queryConditionObj.conditionTitle = mBookNameEt.getText().toString().trim();
             queryConditionObj.conditionAuthor = mBookAuthorEt.getText().toString().trim();
-            queryConditionObj.conditionPress = mBookPressEt.getText().toString().trim();
+            queryConditionObj.conditionPublisher = mBookPressEt.getText().toString().trim();
         }
 
-        setResult(RESULT_OK, new Intent().putExtra(Constant.EXTRA_QUERY_CONDITION, queryConditionObj));
-        finish();
+        startActivity(new Intent(SearchConditionActivity.this, SearchResultActivity.class)
+                .putExtra(Constant.EXTRA_QUERY_CONDITION, queryConditionObj));
     }
 
     @Override
