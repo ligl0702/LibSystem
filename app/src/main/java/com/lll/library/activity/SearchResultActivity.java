@@ -20,8 +20,9 @@ import com.lll.library.util.MyLoadingDialog;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SQLQueryListener;
 
 /**
  * Created by LLL on 2016/10/16.
@@ -58,26 +59,45 @@ public class SearchResultActivity extends Activity implements AdapterView.OnItem
         MyLoadingDialog.showLoading(this);
 
         BmobQuery<Books> query = new BmobQuery<>();
+        StringBuilder bqlSb = new StringBuilder();
+        bqlSb.append("select * from Books book  ");
         if (queryConditionObj != null) {
+            bqlSb.append(" where ");
             if (!TextUtils.isEmpty(queryConditionObj.conditionTitle)) {
-                query.addWhereEqualTo(Constant.QUERY_CONDITION_TITLE, queryConditionObj.conditionTitle);
+//                query.addWhereEqualTo(Constant.QUERY_CONDITION_TITLE, queryConditionObj.conditionTitle);
+                bqlSb.append("book.title like ");
+                bqlSb.append(" '%");
+                bqlSb.append(queryConditionObj.conditionTitle);
+                bqlSb.append("%' ");
+//                bqlSb.append("and ");
             }
             if (!TextUtils.isEmpty(queryConditionObj.conditionAuthor)) {
-                query.addWhereEqualTo(Constant.QUERY_CONDITION_AUTOR, queryConditionObj.conditionAuthor);
+//                query.addWhereEqualTo(Constant.QUERY_CONDITION_AUTOR, queryConditionObj.conditionAuthor);
+                bqlSb.append(" book.author like ");
+                bqlSb.append(" '%");
+                bqlSb.append(queryConditionObj.conditionAuthor);
+                bqlSb.append("%' ");
+//                bqlSb.append("and ");
             }
             if (!TextUtils.isEmpty(queryConditionObj.conditionPublisher)) {
-                query.addWhereEqualTo(Constant.QUERY_CONDITION_PUBLISHER, queryConditionObj.conditionPublisher);
+//                query.addWhereEqualTo(Constant.QUERY_CONDITION_PUBLISHER, queryConditionObj.conditionPublisher);
+                bqlSb.append(" book.publisher like ");
+                bqlSb.append(" '%");
+                bqlSb.append(queryConditionObj.conditionPublisher);
+                bqlSb.append("%' ");
             }
         }
 
+        query.setSQL(bqlSb.toString());
         query.setLimit(Constant.QUERY_LIMIT);
 
-        query.findObjects(new FindListener<Books>() {
+        query.doSQLQuery(new SQLQueryListener<Books>() {
             @Override
-            public void done(List<Books> list, BmobException e) {
+            public void done(BmobQueryResult<Books> bmobQueryResult, BmobException e) {
                 MyLoadingDialog.dismissLoading();
 
                 if (e == null) {
+                    List<Books> list = bmobQueryResult.getResults();
                     if (list.size() > 0) {
                         mBookAdapter.setData(list);
                     } else {

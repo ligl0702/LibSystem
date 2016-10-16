@@ -109,7 +109,9 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
             @Override
             public void done(List<Books> list, BmobException e) {
                 if (e == null) {
-                    mBookAdapter.setData(list);
+                    if (list.size() > 0) {
+                        mBookAdapter.setData(list);
+                    }
                 } else {
                     showToast(e.getMessage() + "," + e.getErrorCode());
                 }

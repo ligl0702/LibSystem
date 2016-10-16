@@ -1,16 +1,32 @@
 package com.lll.library.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.lll.library.R;
 import com.lll.library.adapter.BooksAdapter;
+import com.lll.library.entity.Books;
+import com.lll.library.entity.BorrowBook;
+import com.lll.library.entity.MyUser;
+import com.lll.library.util.Constant;
+
+import java.util.Arrays;
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 
 /**
@@ -21,6 +37,7 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
     private BooksAdapter mBookAdapter;
 
     private View contentView = null;
+    private String[] bookIds;
 
     @Nullable
     @Override
@@ -32,6 +49,8 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
             ((ViewGroup) contentView.getParent()).removeView(contentView);
         }
 
+        queryDataFromBmob();
+
         return contentView;
     }
 
@@ -42,16 +61,71 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
         mBookAdapter = new BooksAdapter(getActivity());
         mBooksLv.setAdapter(mBookAdapter);
         mBooksLv.setOnItemClickListener(this);
-
-        queryDataFromBmob();
     }
 
     private void queryDataFromBmob() {
-        
+        String userId = BmobUser.getCurrentUser(MyUser.class).getUsername();
+        if (!TextUtils.isEmpty(userId)) {
+            BmobQuery<BorrowBook> query = new BmobQuery<>();
+            query.addWhereEqualTo("userId", userId);
+            query.findObjects(new FindListener<BorrowBook>() {
+                @Override
+                public void done(List<BorrowBook> list, BmobException e) {
+                    if (e == null) {
+                        int size = list.size();
+                        if (size > 0) {
+                            bookIds = new String[size];
+                            for (int i = 0; i < size; i++) {
+                                bookIds[i] = list.get(i).bookId;
+                            }
+                            queryBorrowBooks();
+                        } else {
+                            showToast("暂时没有借阅的书，快去借阅吧！");
+                        }
+                    } else {
+                        showToast(e.getMessage() + "," + e.getErrorCode());
+                    }
+                }
+            });
+        }
+    }
+
+    private void queryBorrowBooks() {
+        BmobQuery<Books> query = new BmobQuery<>();
+        query.addWhereContainedIn(Constant.QUERY_CONDITION_TITLE, Arrays.asList(bookIds));
+        query.findObjects(new FindListener<Books>() {
+            @Override
+            public void done(List<Books> list, BmobException e) {
+                if (e == null) {
+                    if (list.size() > 0) {
+                        mBookAdapter.setData(list);
+                    } else {
+                        showToast("暂时没有借阅的书，快去借阅吧！");
+                    }
+                } else {
+                    showToast(e.getMessage() + "," + e.getErrorCode());
+                }
+            }
+        });
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        
+        Books book = (Books) mBookAdapter.getItem(position);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(book.title);
+        builder.setMessage(book.summary);
+        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 }
