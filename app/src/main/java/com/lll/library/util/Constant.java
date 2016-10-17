@@ -68,4 +68,6 @@ public interface Constant {
     public static final String QUERY_CONDITION_TITLE = "title";
     public static final String QUERY_CONDITION_AUTOR = "author";
     public static final String QUERY_CONDITION_PUBLISHER = "publisher";
+    public static final String BOOK_OBJ = "book_obj";
+
 }

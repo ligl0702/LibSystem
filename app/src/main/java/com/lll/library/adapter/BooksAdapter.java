@@ -19,15 +19,15 @@ import com.lll.library.util.PicassoImageLoader;
 public class BooksAdapter extends CommonAdapter {
     private Context context;
     private PicassoImageLoader imageLoader;
-    private BorrowListener borrowListener;
+    //private BorrowListener borrowListener;
 
-    public interface BorrowListener {
-        void borrow(int position, Books book);
-    }
-
-    public void setBorrowListener(BorrowListener borrowListener) {
-        this.borrowListener = borrowListener;
-    }
+//    public interface BorrowListener {
+//        void borrow(int position, Books book);
+//    }
+//
+//    public void setBorrowListener(BorrowListener borrowListener) {
+//        this.borrowListener = borrowListener;
+//    }
 
     public BooksAdapter(Context context) {
         this.context = context;
@@ -46,7 +46,6 @@ public class BooksAdapter extends CommonAdapter {
         TextView author = (TextView) convertView.findViewById(R.id.tv_book_author);
         TextView press = (TextView) convertView.findViewById(R.id.tv_book_press);
         TextView pressDate = (TextView) convertView.findViewById(R.id.tv_book_press_date);
-        Button borrow = (Button) convertView.findViewById(R.id.btn_borrow);
 
         imageLoader.displayImage(book.image, imageView, DisplayUtils.dp2px(context, 70), DisplayUtils.dp2px(context, 100));
         name.setText(book.title);
@@ -54,16 +53,6 @@ public class BooksAdapter extends CommonAdapter {
         press.setText(book.publisher);
         pressDate.setText(book.pubDate);
 
-        borrow.setText(TextUtils.equals("1",book.borrow)?context.getString(R.string.has_been_borrowed):context.getString(R.string.home_borrow));
-
-        borrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (borrowListener != null) {
-                    borrowListener.borrow(position,book);
-                }
-            }
-        });
 
         return convertView;
     }

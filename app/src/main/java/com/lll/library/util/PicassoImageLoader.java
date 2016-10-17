@@ -30,4 +30,15 @@ public class PicassoImageLoader {
                 .into(imageView);
     }
 
+    public void fitImage(String path, ImageView imageView) {
+        Picasso.with(mContext)
+                .load(path)
+                .placeholder(R.drawable.icon_book)
+                .error(R.drawable.icon_book_error)
+                .config(Bitmap.Config.RGB_565)
+                .fit()
+//                .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                .into(imageView);
+    }
+
 }

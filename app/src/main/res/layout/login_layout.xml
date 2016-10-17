@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/login_logo"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="60dp"
         android:scaleType="fitXY"
@@ -82,6 +82,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/img_password"
             android:background="@null"
+            android:inputType="numberPassword"
             android:hint="请输入密码"
             android:maxLines="1"
             android:paddingLeft="12dp"

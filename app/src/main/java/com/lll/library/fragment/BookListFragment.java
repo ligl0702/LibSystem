@@ -2,6 +2,7 @@ package com.lll.library.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.lll.library.R;
+import com.lll.library.activity.BookDetailsActivity;
 import com.lll.library.adapter.BooksAdapter;
 import com.lll.library.entity.BookType;
 import com.lll.library.entity.Books;
@@ -82,28 +84,6 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
         mBooksLv.setAdapter(mBookAdapter);
         mBooksLv.setOnItemClickListener(this);
 
-        mBookAdapter.setBorrowListener(new BooksAdapter.BorrowListener() {
-            @Override
-            public void borrow(final int position, final Books book) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(book.title);
-                builder.setMessage(getString(R.string.book_confirm_borrow_tip));
-                builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        borrowBookToBmob(book);
-                        selectPosition = position;
-                    }
-                });
-                builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                builder.show();
-            }
-        });
 
         getDataFromBundle();
         queryDataFromBmob();
@@ -119,16 +99,20 @@ public class BookListFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Books book = (Books) mBookAdapter.getItem(position);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(book.title);
-        builder.setMessage(book.summary);
-        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setTitle(book.title);
+//        builder.setMessage(book.summary);
+//        builder.setPositiveButton(getString(R.string.confirm), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        builder.show();
+
+        Intent intent = new Intent(getActivity(), BookDetailsActivity.class);
+        intent.putExtra(Constant.BOOK_OBJ,book);
+        startActivity(intent);
     }
 
     private void queryDataFromBmob() {

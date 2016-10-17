@@ -54,15 +54,5 @@
         android:layout_marginTop="2dp"
         tools:text="2016年出版" />
 
-    <Button
-        android:id="@+id/btn_borrow"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/bg_login_button"
-        android:focusable="false"
-        android:textColor="@color/white"
-        android:text="借阅" />
 
 </RelativeLayout>
