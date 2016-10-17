@@ -45,6 +45,7 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
         if (contentView == null) {
             initView(inflater);
         }
+        queryDataFromBmob();
         if (contentView.getParent() != null) {
             ((ViewGroup) contentView.getParent()).removeView(contentView);
         }
@@ -60,7 +61,7 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
         mBooksLv.setAdapter(mBookAdapter);
         mBooksLv.setOnItemClickListener(this);
 
-        queryDataFromBmob();
+
     }
 
     private void queryDataFromBmob() {

@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.lll.library.R;
+import com.lll.library.activity.FeedBackActivity;
 import com.lll.library.activity.LoginActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -78,7 +79,7 @@ public class MineFragment extends Fragment {
         ll_main_feedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // startActivity(new Intent(context, FeedbackActivity.class));
+                startActivity(new Intent(context, FeedBackActivity.class));
             }
         });
 
