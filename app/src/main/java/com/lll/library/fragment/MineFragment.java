@@ -14,9 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.lll.library.R;
+import com.lll.library.activity.ChangePwdActivity;
 import com.lll.library.activity.FeedBackActivity;
 import com.lll.library.activity.LoginActivity;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -43,20 +46,17 @@ public class MineFragment extends Fragment {
     Button bt_logout;
     @Bind(R.id.iv_headview)
     ImageView iv_headview;
-
-
-
+    @Bind(R.id.ll_change_password)
+    LinearLayout ll_change_password;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = getActivity();
-        if (contentView == null)
-        {
+        if (contentView == null) {
             initUI(inflater);
         }
-        if (contentView.getParent() != null)
-        {
+        if (contentView.getParent() != null) {
             ((ViewGroup) contentView.getParent()).removeView(contentView);
         }
         return contentView;
@@ -86,7 +86,7 @@ public class MineFragment extends Fragment {
         ll_version_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"已经是最新版",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "已经是最新版", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -94,6 +94,13 @@ public class MineFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(context, ContactsUsActivity.class));
+            }
+        });
+
+        ll_change_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ChangePwdActivity.class));
             }
         });
 
@@ -109,10 +116,9 @@ public class MineFragment extends Fragment {
 
     private void sendLogoutRequest() {
         //此处删除sp文件的userid
-        Toast.makeText(context,"已注销",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "已注销", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(context, LoginActivity.class));
         getActivity().finish();
-
 
 
     }
