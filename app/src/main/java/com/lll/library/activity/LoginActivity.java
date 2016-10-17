@@ -94,9 +94,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //通过BmobUser user = BmobUser.getCurrentUser(context)获取登录成功后的本地用户信息
                     //如果是自定义用户对象MyUser，可通过MyUser user = BmobUser.getCurrentUser(context,MyUser.class)获取自定义用户信息
 
-                    if (e == null) {
-                        MyLoadingDialog.dismissLoading();
+                    MyLoadingDialog.dismissLoading();
 
+                    if (e == null) {
                         showToast(getString(R.string.login_success_tip));
                         SpUtil.putString(LoginActivity.this, Constant.USER_NAME, mLoginNameEt.getText().toString().trim());
                         SpUtil.putString(LoginActivity.this, Constant.USER_ROLE, o.role);//角色，管理员1/读者0
