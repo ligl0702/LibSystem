@@ -21,6 +21,8 @@ import com.lll.library.R;
 import com.lll.library.activity.ChangePwdActivity;
 import com.lll.library.activity.FeedBackActivity;
 import com.lll.library.activity.LoginActivity;
+import com.lll.library.util.Constant;
+import com.lll.library.util.SpUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -127,10 +129,11 @@ public class MineFragment extends Fragment {
 
     private void sendLogoutRequest() {
         //此处删除sp文件的userid
+        SpUtil.putString(context, Constant.USER_PWD, "");
+        SpUtil.putBoolean(context, Constant.IS_REMEMBER_PWD, false);
         Toast.makeText(context, "已注销", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(context, LoginActivity.class));
         getActivity().finish();
-
 
     }
 }
