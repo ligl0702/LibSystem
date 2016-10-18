@@ -61,7 +61,6 @@ public class BorrowFragment extends Fragment implements AdapterView.OnItemClickL
         mBooksLv.setAdapter(mBookAdapter);
         mBooksLv.setOnItemClickListener(this);
 
-
     }
 
     private void queryDataFromBmob() {

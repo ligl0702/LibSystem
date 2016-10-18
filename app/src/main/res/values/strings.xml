@@ -41,4 +41,6 @@
 
     <string name="contact_us_str">姓名:李国梁\n学号:1403082114\n电话:18210252019\n邮箱:guoliangli@pptv.com\n地址:北京大学计算中心</string>
 
+    <string name="confirm_logout">确认注销？</string>
+
 </resources>
