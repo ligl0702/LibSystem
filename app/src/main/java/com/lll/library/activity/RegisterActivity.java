@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import com.lll.library.entity.MyUser;
 import com.lll.library.util.Constant;
 import com.lll.library.util.MyLoadingDialog;
 
-import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -31,8 +29,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     private EditText mLoginPwdEt;
 
     private RadioGroup mRoleRg;//角色，管理员1/读者0
-    private RadioButton mAdminRb;//管理员1
-    private RadioButton mReaderRb;//读者0
 
     private String mRole;
 
@@ -52,8 +48,6 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
         mLoginPwdEt = (EditText) findViewById(R.id.et_password);
 
         mRoleRg = (RadioGroup) findViewById(R.id.rg_role);
-        mAdminRb = (RadioButton) findViewById(R.id.rb_administrator);
-        mReaderRb = (RadioButton) findViewById(R.id.rb_reader);
         mRoleRg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -111,11 +105,13 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     private boolean validate() {
         if (TextUtils.isEmpty(mLoginNameEt.getText().toString().trim())) {
             showToast(getString(R.string.enter_login_name_tip));
+            mLoginNameEt.requestFocus();
             return false;
         }
 
         if (TextUtils.isEmpty(mLoginPwdEt.getText().toString().trim())) {
             showToast(getString(R.string.enter_login_pwd_tip));
+            mLoginPwdEt.requestFocus();
             return false;
         }
 
